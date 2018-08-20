@@ -15,6 +15,7 @@ So that public sharing is limited according to organization policy
 		And the user has browsed to the login page
 		And the user has logged in with username "user1" and password "1234" using the webUI
 
+	@smokeTest
 	Scenario: simple sharing by public link
 		When the user creates a new public link for the folder "simple-folder" using the webUI
 		And the public accesses the last created public link using the webUI
@@ -42,6 +43,7 @@ So that public sharing is limited according to organization policy
 		Then it should not be possible to delete the file "lorem.txt" using the webUI
 
 	@skipOnINTERNETEXPLORER @skipOnMICROSOFTEDGE @issue-30392
+	@smokeTest
 	Scenario: mount public link
 		Given using server "REMOTE"
 		And these users have been created:

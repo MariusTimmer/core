@@ -6,7 +6,8 @@ Feature: federated
 		And user "user0" has been created
 		And using server "LOCAL"
 		And user "user1" has been created
-		
+
+	@smokeTest
 	Scenario: Federate share a file with another server
 		When user "user1" from server "LOCAL" shares "/textfile0.txt" with user "user0" from server "REMOTE" using the sharing API
 		Then the OCS status code should be "100"
@@ -28,6 +29,7 @@ Feature: federated
 			| share_with             | user0@REMOTE   |
 			| share_with_displayname | user0@REMOTE   |
 
+	@smokeTest
 	Scenario: Federate share a file with local server
 		When user "user0" from server "REMOTE" shares "/textfile0.txt" with user "user1" from server "LOCAL" using the sharing API
 		Then the OCS status code should be "100"
@@ -65,6 +67,7 @@ Feature: federated
 			| mountpoint  | {{TemporaryMountPointName#/textfile0.txt}} |
 			| accepted    | 0                                          |
 
+	@smokeTest
 	Scenario: accept a pending remote share
 		Given user "user0" from server "REMOTE" has shared "/textfile0.txt" with user "user1" from server "LOCAL"
 		When user "user1" from server "LOCAL" accepts the last pending share using the sharing API
@@ -115,6 +118,7 @@ Feature: federated
 		And using server "REMOTE"
 		Then the content of file "/textfile0.txt" for user "user0" should be "BLABLABLA" plus end-of-line
 
+	@smokeTest
 	Scenario: Overwrite a file in a federated shared folder as recipient - local server shares - remote server receives
 		Given user "user1" from server "LOCAL" has shared "/PARENT" with user "user0" from server "REMOTE"
 		And user "user0" from server "REMOTE" has accepted the last pending share
@@ -123,6 +127,7 @@ Feature: federated
 		And using server "LOCAL"
 		Then the content of file "/PARENT/textfile0.txt" for user "user1" should be "BLABLABLA" plus end-of-line
 
+	@smokeTest
 	Scenario: Overwrite a file in a federated shared folder as recipient - remote server shares - local server receives
 		Given user "user0" from server "REMOTE" has shared "/PARENT" with user "user1" from server "LOCAL"
 		And user "user1" from server "LOCAL" has accepted the last pending share

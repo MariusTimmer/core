@@ -1,6 +1,7 @@
 @api
 Feature: Status
 
+  @smokeTest
   Scenario: Status.php is correct
       When the admin requests status.php
       Then the status.php response should match with

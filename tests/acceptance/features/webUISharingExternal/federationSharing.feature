@@ -16,6 +16,7 @@ So that other users have access to these files
 		And the user has browsed to the login page
 		And the user has logged in with username "user1" and password "1234" using the webUI
 
+	@smokeTest
 	Scenario: test the single steps of sharing a folder to a remote server
 		When the user shares the folder "simple-folder" with the remote user "user1@%remote_server_without_scheme%" using the webUI
 		And the user shares the folder "simple-empty-folder" with the remote user "user1@%remote_server_without_scheme%" using the webUI
@@ -26,6 +27,7 @@ So that other users have access to these files
 		And as "user1" the file "/simple-folder (2)/lorem.txt" should exist
 		And as "user1" the folder "/simple-empty-folder (2)" should exist
 
+	@smokeTest
 	Scenario: test the single steps of receiving a federation share
 		Given using server "REMOTE"
 		And these users have been created:
@@ -51,6 +53,7 @@ So that other users have access to these files
 		And the folder "simple-folder (2)" should be listed in the shared-with-you page on the webUI
 		And the folder "simple-empty-folder (2)" should be listed in the shared-with-you page on the webUI
 
+	@smokeTest
 	Scenario: declining a federation share on the webUI
 		Given user "user1" from server "REMOTE" has shared "/lorem.txt" with user "user1" from server "LOCAL"
 		And the user has reloaded the current page of the webUI
