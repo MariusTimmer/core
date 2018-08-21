@@ -837,7 +837,8 @@ class View {
 						$result = $storage2->moveFromStorage($storage1, $internalPath1, $internalPath2);
 					}
 
-					if ((Cache\Scanner::isPartialFile($path1) && !Cache\Scanner::isPartialFile($path2)) && $result !== false) {
+					$ignorePartFile = \OC::$server->getConfig()->getAppValue('core', 'ignorepartfile', 'false');
+					if ((Cache\Scanner::isPartialFile($path1) && !Cache\Scanner::isPartialFile($path2)) && $result !== false && ($ignorePartFile === 'false')) {
 						// if it was a rename from a part file to a regular file it was a write and not a rename operation
 
 						$this->writeUpdate($storage2, $internalPath2);

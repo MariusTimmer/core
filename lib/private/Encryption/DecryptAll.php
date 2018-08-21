@@ -271,7 +271,9 @@ class DecryptAll {
 			\OC\Files\Storage\Wrapper\Encryption::setDisableWriteEncryption(true);
 			$this->rootView->copy($source, $target);
 			\OC\Files\Storage\Wrapper\Encryption::setDisableWriteEncryption(false);
+			\OC::$server->getConfig()->setAppValue('core', 'ignorepartfile', 'true');
 			$this->rootView->rename($target, $source);
+			\OC::$server->getConfig()->deleteAppValue('core', 'ignorepartfile');
 			list($storage, $internalPath) = $this->rootView->resolvePath($source);
 			//Update the encrypted column in file cache to zero, as the file is decrypted
 			$storage->getCache()->put($internalPath, ['encrypted' => 0]);
