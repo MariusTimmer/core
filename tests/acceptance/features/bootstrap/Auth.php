@@ -79,7 +79,7 @@ trait Auth {
 	 * @return void
 	 */
 	public function setUpScenario() {
-		$this->client = new Client();
+		$this->client = new Client(['defaults' => [ 'verify' => false ]]);
 		$this->responseXml = '';
 	}
 
@@ -177,7 +177,7 @@ trait Auth {
 	 * @return void
 	 */
 	public function aNewClientTokenHasBeenGenerated($user) {
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$resp = $client->post(
 			$this->getBaseUrl() . '/token/generate', [
 			'json' => [
@@ -274,7 +274,7 @@ trait Auth {
 	public function aNewBrowserSessionForHasBeenStarted($user) {
 		$loginUrl = $this->getBaseUrl() . '/index.php/login';
 		// Request a new session and extract CSRF token
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$response = $client->get(
 			$loginUrl, [
 			'cookies' => $this->cookieJar,
@@ -283,7 +283,7 @@ trait Auth {
 		$this->extractRequestTokenFromResponse($response);
 
 		// Login and extract new token
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$response = $client->post(
 			$loginUrl, [
 				'body' => [

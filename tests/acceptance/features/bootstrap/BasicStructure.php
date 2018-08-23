@@ -646,7 +646,7 @@ trait BasicStructure {
 	 */
 	public function sendingToWithDirectUrl($user, $verb, $url, $body) {
 		$fullUrl = $this->getBaseUrl() . $url;
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForUser($user);
 
@@ -806,7 +806,7 @@ trait BasicStructure {
 	public function userHasLoggedInToAWebStyleSessionUsingTheAPI($user) {
 		$loginUrl = $this->getBaseUrl() . '/login';
 		// Request a new session and extract CSRF token
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$response = $client->get(
 			$loginUrl,
 			[
@@ -817,7 +817,7 @@ trait BasicStructure {
 
 		// Login and extract new token
 		$password = $this->getPasswordForUser($user);
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$response = $client->post(
 			$loginUrl,
 			[
@@ -842,7 +842,7 @@ trait BasicStructure {
 	 * @return void
 	 */
 	public function sendingAToWithRequesttoken($method, $url) {
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$request = $client->createRequest(
 			$method,
 			$this->getBaseUrl() . $url,
@@ -868,7 +868,7 @@ trait BasicStructure {
 	 * @return void
 	 */
 	public function sendingAToWithoutRequesttoken($method, $url) {
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$request = $client->createRequest(
 			$method,
 			$this->getBaseUrl() . $url,
@@ -1011,7 +1011,7 @@ trait BasicStructure {
 	 */
 	public function getStatusPhp() {
 		$fullUrl = $this->getBaseUrl() . "/status.php";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForUser('admin');
 		try {
@@ -1211,7 +1211,7 @@ trait BasicStructure {
 			$fullUrl .= '/';
 		}
 		$fullUrl .= "ocs/v1.php/apps/testing/api/v1/increasefileid";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$suiteSettingsContexts = $scope->getSuite()->getSettings()['contexts'];
 		$adminUsername = null;

@@ -78,7 +78,7 @@ trait Checksums {
 	 * @return void
 	 */
 	public function userRequestsTheChecksumOfViaPropfind($user, $path) {
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$request = $client->createRequest(
 			'PROPFIND',
 			$this->getBaseUrl() . '/' . $this->getDavFilesPath($user) . $path,

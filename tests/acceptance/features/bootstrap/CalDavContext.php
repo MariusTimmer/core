@@ -60,7 +60,7 @@ class CalDavContext implements \Behat\Behat\Context\Context {
 		$environment = $scope->getEnvironment();
 		// Get all the contexts you need in this context
 		$this->featureContext = $environment->getContext('FeatureContext');
-		$this->client = new Client();
+		$this->client = new Client(['defaults' => [ 'verify' => false ]]);
 		$this->responseXml = '';
 	}
 

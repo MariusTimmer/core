@@ -545,7 +545,7 @@ trait Provisioning {
 	public function initializeUser($user, $password) {
 		$url = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/cloud/users/$user";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [
 			'auth' => [$user, $password],
 		];
@@ -718,7 +718,7 @@ trait Provisioning {
 	 */
 	public function userExists($user) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/users/$user";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 		try {
@@ -740,7 +740,7 @@ trait Provisioning {
 	 */
 	public function userShouldBelongToGroup($user, $group) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/users/$user/groups";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -763,7 +763,7 @@ trait Provisioning {
 	 */
 	public function userShouldNotBelongToGroup($user, $group) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/users/$user/groups";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -784,7 +784,7 @@ trait Provisioning {
 	 */
 	public function userBelongsToGroup($user, $group) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/users/$user/groups";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1037,7 +1037,7 @@ trait Provisioning {
 	public function adminDisablesUserUsingTheProvisioningApi($user) {
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/cloud/users/$user/disable";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1131,7 +1131,7 @@ trait Provisioning {
 	public function groupExists($group) {
 		$group = \rawurlencode($group);
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/groups/$group";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 		try {
@@ -1179,7 +1179,7 @@ trait Provisioning {
 	 */
 	public function userShouldBeSubadminOfGroup($user, $group) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/groups/$group/subadmins";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1206,7 +1206,7 @@ trait Provisioning {
 	) {
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/cloud/users/$user/subadmins";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 		$options['body'] = [
@@ -1233,7 +1233,7 @@ trait Provisioning {
 		$user, $group
 	) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/groups/$group/subadmins";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1380,7 +1380,7 @@ trait Provisioning {
 	 */
 	public function theUserIsTheSubadminOfTheGroup($user, $group) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/groups/$group/subadmins";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = [$this->getAdminUsername(),$this->getAdminPassword()];
 		$this->response = $client->get($fullUrl, $options);
@@ -1401,7 +1401,7 @@ trait Provisioning {
 	 */
 	public function theUserIsNotTheSubadminOfTheGroup($user, $group) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/groups/$group/subadmins";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = [$this->getAdminUsername(),$this->getAdminPassword()];
 		$this->response = $client->get($fullUrl, $options);
@@ -1503,7 +1503,7 @@ trait Provisioning {
 	 */
 	public function appShouldBeDisabled($app) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/apps?filter=disabled";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1524,7 +1524,7 @@ trait Provisioning {
 	 */
 	public function appShouldBeEnabled($app) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/apps?filter=enabled";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1545,7 +1545,7 @@ trait Provisioning {
 	 */
 	public function theInformationForAppShouldHaveAValidVersion($app) {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/apps/$app";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1576,7 +1576,7 @@ trait Provisioning {
 	public function userShouldBeDisabled($user) {
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/cloud/users/$user";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1596,7 +1596,7 @@ trait Provisioning {
 	public function useShouldBeEnabled($user) {
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/cloud/users/$user";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 
@@ -1659,7 +1659,7 @@ trait Provisioning {
 	public function getUserHome($user) {
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/cloud/users/$user";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 		$this->response = $client->get($fullUrl, $options);
@@ -1825,7 +1825,7 @@ trait Provisioning {
 	 */
 	public function getEnabledApps() {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/apps?filter=enabled";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 		$this->response = $client->get($fullUrl, $options);
@@ -1839,7 +1839,7 @@ trait Provisioning {
 	 */
 	public function getDisabledApps() {
 		$fullUrl = $this->getBaseUrl() . "/ocs/v2.php/cloud/apps?filter=disabled";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForAdmin();
 		$this->response = $client->get($fullUrl, $options);

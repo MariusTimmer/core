@@ -87,7 +87,7 @@ trait Sharing {
 	public function userCreatesAShareWithSettings($user, $body) {
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/apps/files_sharing/api/v{$this->sharingApiVersion}/shares";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForUser($user);
 
@@ -242,7 +242,7 @@ trait Sharing {
 		$fullUrl = $this->getBaseUrl()
 			. "/public.php/webdav/" . \rawurlencode(\ltrim($path, '/'));
 
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = [$token, ""];
 		$options['headers']['X-Requested-With'] = 'XMLHttpRequest';
@@ -313,7 +313,7 @@ trait Sharing {
 	 * @return void
 	 */
 	private function checkUserDownload($url, $options, $mimeType) {
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$this->response = $client->get($url, $options);
 		PHPUnit_Framework_Assert::assertEquals(
 			200,
@@ -349,7 +349,7 @@ trait Sharing {
 		$options['stream'] = true;
 		$options['headers']['X-Requested-With'] = 'XMLHttpRequest';
 
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$this->response = $client->get($url, $options);
 		PHPUnit_Framework_Assert::assertEquals(
 			200,
@@ -501,7 +501,7 @@ trait Sharing {
 			$options['headers']['OC-Autorename'] = 1;
 		}
 
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		try {
 			$this->response = $client->send(
 				$client->createRequest('PUT', $url, $options)
@@ -522,7 +522,7 @@ trait Sharing {
 		$share_id = (string) $this->lastShareData->data[0]->id;
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/apps/files_sharing/api/v{$this->sharingApiVersion}/shares/$share_id";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForUser($this->currentUser);
 		$date = \date('Y-m-d', \strtotime("+3 days"));
@@ -561,7 +561,7 @@ trait Sharing {
 		$share_id = (string) $this->lastShareData->data[0]->id;
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/apps/files_sharing/api/v{$this->sharingApiVersion}/shares/$share_id";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForUser($user);
 
@@ -791,7 +791,7 @@ trait Sharing {
 	) {
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/apps/files_sharing/api/v{$this->sharingApiVersion}/shares?path=$filepath";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForUser($user1);
 		$this->response = $client->get($fullUrl, $options);
@@ -851,7 +851,7 @@ trait Sharing {
 	) {
 		$fullUrl = $this->getBaseUrl()
 			. "/ocs/v{$this->ocsApiVersion}.php/apps/files_sharing/api/v{$this->sharingApiVersion}/shares?path=$filepath";
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForUser($user);
 		$this->response = $client->get($fullUrl, $options);
@@ -1150,7 +1150,7 @@ trait Sharing {
 			. "/ocs/v{$this->ocsApiVersion}.php/apps/files_sharing/api/v{$this->sharingApiVersion}/shares";
 		$fullUrl = "$fullUrl?path=$path";
 
-		$client = new Client();
+		$client = new Client(['defaults' => [ 'verify' => false ]]);
 		$options = [];
 		$options['auth'] = $this->getAuthOptionForUser($user);
 
